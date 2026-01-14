@@ -54,3 +54,31 @@ console.log(numF, typeof numF); // 0 "number"
 let numFloat = Number(`${3.14159+394.434}`);
 console.log(numFloat, typeof numFloat); // 397.57559 "number"
 
+// function declaration is a statement
+function add(x, y) {
+    return x+y;
+}
+console.log(add("Hello ", "World")); // "Hello World"
+console.log(add(10, 20)); // 30
+
+// fxns can also be created using function expressions
+// statements don't produce values, but expression do
+// fxn declarations are hoisted, function expressions are not
+const multiply = function(x, y) {
+    return x * y;
+}
+console.log(multiply(6, 7)); // 42
+
+// loops
+let x = 5;
+for(let i=0; i<x; i++) {
+    console.log(`Loop Iteration ${i}`);
+}
+
+// recursion
+loopingRec(0, 5)
+function loopingRec(i, x) {
+    if(i>=x) return;
+    console.log(`Recursion Iteration ${i}`);
+    loopingRec(i+1, x);
+}
