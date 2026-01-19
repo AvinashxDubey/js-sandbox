@@ -82,3 +82,121 @@ function loopingRec(i, x) {
     console.log(`Recursion Iteration ${i}`);
     loopingRec(i+1, x);
 }
+
+// nested fxn
+const fname = "Alice"; //global variable
+function getScore() {
+  const num1 = 2; // inner function variable
+  const num2 = 3;
+
+  function add() {
+    return `${fname} scored ${num1 + num2}`;
+  }
+
+  return add();
+}
+
+console.log(getScore()); // "Alice scored 5"
+
+function argCheck() {
+    const [f, s , t] = arguments;
+
+    console.log(`First Arg: ${f}, Second Arg: ${s}, Third Arg: ${t}`);
+}
+
+argCheck(19, 'hello', true);
+
+// repititively calling a fxn after a fixed time interval
+// setInterval(() => {
+//     console.log('This message is shown every 2 seconds');
+// }, 2000);
+
+import PromptSync from "prompt-sync";
+const prompt = PromptSync();
+
+// setInterval executes the callback fxn every n milliseconds
+// let age = 0;
+// setInterval(() => {
+//     const name = prompt('wanna know the age: ');
+//     if(name.toLowerCase() === 'y'){
+//         console.log(`Age is: ${++age}`);
+//     } else {
+//         console.log('Okay, bye!');
+//     }
+// }, 2000);
+
+
+// function Person1() {
+//   // The Person() constructor defines `this` as the new object
+//   this.age = 0; 
+
+//   setInterval(function growUp() {
+//     this.age++; // Here, `this` refers to the global object, not the Person object
+//     console.log(this.age);  // prints NaN
+//   }, 1000);
+// }
+
+// const p = new Person1();
+
+// Arrow functions do not create their own this
+// They capture this from where they are written
+// function Person2() {
+//   this.age = 0;
+
+//   setInterval(() => {
+//     this.age++;
+//   }, 1000);
+// }
+
+// diff between for in and for of
+const arr = [3, 5, 7];
+arr.foo = "hello";
+
+for (const i in arr) {
+  console.log(i);
+} // "0" "1" "2" "foo"
+
+for (const i of arr) {
+  console.log(i);
+} // Logs: 3 5 7
+
+// using for in with destructuring to print key value pairs
+const obj0 = { goo: 1, bar: 2 };
+
+for (const [key, val] of Object.entries(obj0)) {
+  console.log(key, val);
+}
+
+const user = {
+    0: 'unga bunga',
+    woops: 'woopsie'
+}
+
+console.log(user[0]);
+// console.log(user[woops]); // ReferenceError: woops is not defined
+console.log(user.woops);
+
+// concat method doesnt mutate the original array with some other egs like concat(), filter(), flat(), flatMap(), map(), slice(), and splice() 
+const letters = ["a", "b", "c"];
+const numbers = [1, 2, 3];
+const moreNumbers = [4, 5];
+
+const combined = letters.concat(numbers, moreNumbers, 6);
+console.log(combined); // Output: ['a', 'b', 'c', 1, 2, 3, 4, 5, 6]
+console.log(letters);  // Original array remains unchanged: ['a', 'b', 'c']
+
+const whatda = ['aiyo', 'banana', 'ka', 'pata', 'pe', 'roti', 'khata', 'ji'];
+whatda.copyWithin(2, 4, 6);
+console.log(whatda); // ['aiyo', 'banana', 'pe', 'roti', 'pe', 'roti', 'khata', 'ji']
+
+const betterWhatda = ['ayo', 'ju', 'ead', 'on', 'banaana', 'pladea'];
+const newWhatda = betterWhatda.slice().copyWithin(0, 5);
+// another way to create shallow copy is using spread op
+// const newWhatda = [...betterWhatda].copyWithin(0, 5);
+// og arr remains unchanged since we be slicing to create a shallow copy
+console.log(betterWhatda);
+console.log(newWhatda);
+whatda.map(() => {
+    console.log(this);
+}, 2);
+console.log(whatda.length)

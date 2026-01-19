@@ -69,12 +69,18 @@ const diffPuzzle = (arr, coord) => {
 
     let x0 = -1, y0 = -1;
     // find coordinates of 0
+    let count = 0;
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
             if (arr[i][j] === 0) {
+                count++;
                 x0 = i;
                 y0 = j;
-                break;
+            }
+    // check for more than one empty spaces
+            if(count>1) {
+                console.log('Invalid board: more than one empty space');
+                return;
             }
         }
     }
@@ -96,17 +102,18 @@ import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
 const gameShell = () => {
-    let board = [];
+    
     let m = parseInt(prompt('Enter number of rows: '));
     let n = parseInt(prompt('Enter number of columns: '));
-    console.log('Enter the board row-wise (use 0 for empty space): ');
-    for(let i=0; i<m; i++) {
-        board.push([]);
-        for(let j=0; j<n; j++) {
-            let val = parseInt(prompt(`Element at (${i}, ${j}): `));
-            board[i].push(val);
-        }
-    }
+    // console.log('Enter the board row-wise (use 0 for empty space): ');
+    // for(let i=0; i<m; i++) {
+    //     board.push([]);
+    //     for(let j=0; j<n; j++) {
+    //         let val = parseInt(prompt(`Element at (${i}, ${j}): `));
+    //         board[i].push(val);
+    //     }
+    // }
+    let board = generateMatrix(m, n);
     console.log('Initial Board: ');
     console.log(board);
 
@@ -115,8 +122,25 @@ const gameShell = () => {
         let y = parseInt(prompt('Enter column of tile to move=: '));
         diffPuzzle(board, [x, y]);
         let ch = prompt('Do you want to continue? (y/n): ');
-        if(ch.toLowerCase() !== 'y') break;
+        if(ch?.toLowerCase() !== 'y') break;
     }
 }
 
+
+const generateMatrix = (m, n) => {
+    let set = new Set();
+    let matrix = [];
+    for(let i=0; i<m; i++) {
+        matrix.push([]);
+        for(let j=0; j<n; j++) {
+            let val = Math.floor(Math.random() * (m*n));
+            while(set.has(val)) {
+                val = Math.floor(Math.random() * (m*n));
+            }
+            set.add(val);
+            matrix[i].push(val);
+        }
+    }
+    return matrix;
+}
 gameShell();
