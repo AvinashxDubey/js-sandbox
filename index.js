@@ -196,7 +196,13 @@ const newWhatda = betterWhatda.slice().copyWithin(0, 5);
 // og arr remains unchanged since we be slicing to create a shallow copy
 console.log(betterWhatda);
 console.log(newWhatda);
+
+// arrow functions dont have their own this
 whatda.map(() => {
     console.log(this);
-}, 2);
+}, 2);  // arrow fxns ignore thisArgs, they always use lexical this
+
+whatda.map(function() {
+    console.log(this);
+}, 2) // function expression takes thisArgs as this
 console.log(whatda.length)
