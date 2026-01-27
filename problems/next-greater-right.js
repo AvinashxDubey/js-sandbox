@@ -1,7 +1,7 @@
 const nge = (arr) => {
     let st = [arr[arr.length-1]];
     const ans = [-1];
-    for (let i = a.length - 2; i >= 0; i--) {
+    for (let i = arr.length - 2; i >= 0; i--) {
         const ele = arr[i];
         while(st.length!=0 && st[st.length-1]<=ele){
             st.pop();
@@ -18,8 +18,8 @@ const nge = (arr) => {
     return ans;
 }
 
-const a = [2, 1, 2, 4, 3];
-console.log(nge(a));
+const arr1 = [2, 1, 2, 4, 3];
+console.log(nge(arr1));
 
 
 /**
